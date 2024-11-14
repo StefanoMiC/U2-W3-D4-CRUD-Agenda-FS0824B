@@ -39,7 +39,8 @@ window.addEventListener("DOMContentLoaded", function () {
                         <li class="list-group-item ps-2"><strong>updatedAt:</strong> ${new Date(updatedAt).toLocaleString()}</li>
                     </ul>
                     <button class="btn btn-success" onclick="handleClick()">Modifica</button>
-        
+                    <a class="btn btn-success" href="./backoffice.html?appId=${id}">Modifica2</a>
+    
         `;
     })
     .catch(err => console.log(err));

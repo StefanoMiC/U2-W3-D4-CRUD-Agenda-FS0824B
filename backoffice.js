@@ -44,7 +44,7 @@ const handleSubmit = e => {
   fetch(URL, {
     // method: id ? "PUT" : "POST",
     // method: method,
-    method: method,
+    method,
     body: JSON.stringify(newAppointment), // è fondamentale fare la stringhifizzazione dell'oggetto nativo o invieremo "[object Object]"
     // un header in particolare è importantissimo, il Content-Type, per specificare il formato di invio, altrimenti non verrà riconosciuto dal server
     // l'Authorization header serve in caso di API che richiedono autenticazione tramite una API Key
@@ -77,21 +77,24 @@ const handleSubmit = e => {
 };
 
 const handleDelete = () => {
-  fetch(URL, { method: "DELETE" }) // già a questo punto la risorsa è stata eliminata
-    .then(resp => {
-      // aspettare con un then ci può essere utile anche solo per sapere esattamente quando il server ci ha risposto per avere ulteriore conferma
-      if (resp.ok) {
-        return resp.json();
-      }
-    })
-    .then(deletedObj => {
-      alert("la risorsa con id " + deletedObj._id + " è stata eliminata con successo");
-      // l'alert è bloccante, questa operazione avverrà solo dopo che l'utente lo chiuderà
-      // se non usassimo un alert qui servirebbe ritardare l'esecuzione del metodo assign di window,
-      // ma siccome alert è "bloccante" in questo specifico caso non occorre
-      window.location.assign("/");
-    })
-    .catch(err => console.log(err));
+  const hasConfirmed = confirm("sei sicuro di voler eliminare la risorsa?");
+  if (hasConfirmed) {
+    fetch(URL, { method: "DELETE" }) // già a questo punto la risorsa è stata eliminata
+      .then(resp => {
+        // aspettare con un then ci può essere utile anche solo per sapere esattamente quando il server ci ha risposto per avere ulteriore conferma
+        if (resp.ok) {
+          return resp.json();
+        }
+      })
+      .then(deletedObj => {
+        alert("la risorsa con id " + deletedObj._id + " è stata eliminata con successo");
+        // l'alert è bloccante, questa operazione avverrà solo dopo che l'utente lo chiuderà
+        // se non usassimo un alert qui servirebbe ritardare l'esecuzione del metodo assign di window,
+        // ma siccome alert è "bloccante" in questo specifico caso non occorre
+        window.location.assign("/");
+      })
+      .catch(err => console.log(err));
+  }
 };
 
 window.addEventListener("DOMContentLoaded", function () {

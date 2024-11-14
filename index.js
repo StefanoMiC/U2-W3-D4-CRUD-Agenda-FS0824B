@@ -39,10 +39,24 @@ const getAppointments = function () {
       appointments.forEach(appoinment => {
         const listItem = document.createElement("li");
         listItem.className = "list-group-item d-flex align-items-center";
-        listItem.innerHTML = `<span class="me-auto">${appoinment.name}</span> 
-        <span class="badge ${appoinment.price > 0 ? "text-bg-dark" : "text-bg-success"} me-2">
-        ${appoinment.price > 0 ? appoinment.price + "€" : "gratis"}</span>
-        <a href="./details.html?appId=${appoinment._id}">VEDI DETTAGLI</a>`;
+
+        const itemName = document.createElement("span");
+        itemName.className = "me-auto";
+        itemName.innerText = appoinment.name;
+
+        const itemPrice = document.createElement("span");
+        itemPrice.className = `badge ${appoinment.price > 0 ? "text-bg-dark" : "text-bg-success"} me-2`;
+        itemPrice.innerText = appoinment.price > 0 ? appoinment.price + "€" : "gratis";
+
+        const itemLink = document.createElement("a");
+        itemLink.innerText = "VEDI DETTAGLI";
+        itemLink.href = "./details.html?appId=" + appoinment._id;
+
+        listItem.append(itemName, itemPrice, itemLink);
+        // listItem.innerHTML = `<span class="me-auto">${appoinment.name}</span>
+        // <span class="badge ${appoinment.price > 0 ? "text-bg-dark" : "text-bg-success"} ">
+        // ${appoinment.price > 0 ? appoinment.price + "€" : "gratis"}</span>
+        // <a href="./details.html?appId=${appoinment._id}">VEDI DETTAGLI</a>`;
         ul.appendChild(listItem);
       });
     })
