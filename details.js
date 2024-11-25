@@ -7,7 +7,7 @@ const URL = "https://striveschool-api.herokuapp.com/api/agenda/";
 const params = new URLSearchParams(window.location.search); // oggetto costruito a partire dai parametri nella URL es. ?appId=2938123
 const id = params.get("appId"); // metodo sull'oggetto URLSearchParams che ci estrae il valore corrispondente alla chiave "appId" da noi scelta e
 // applicata al link in homepage
-
+console.log("RESOURCE ID:", id);
 window.addEventListener("DOMContentLoaded", function () {
   // al caricamento della pagina facciamo richiesta al server di tornarci i dati specifici della risorsa con l'id che troviamo nella URL
 

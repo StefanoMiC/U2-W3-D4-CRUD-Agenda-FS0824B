@@ -1,5 +1,6 @@
 const params = new URLSearchParams(window.location.search);
 const id = params.get("appId");
+console.log("RESOURCE ID:", id);
 const URL = id ? "https://striveschool-api.herokuapp.com/api/agenda/" + id : "https://striveschool-api.herokuapp.com/api/agenda/";
 const method = id ? "PUT" : "POST";
 
